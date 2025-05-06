@@ -72,7 +72,7 @@ class AtomicData(torch_geometric.data.Data):
         # Check shapes
         num_nodes = node_attrs.shape[0]
 
-        assert edge_index.shape[0] == 2 and len(edge_index.shape) == 2
+        assert edge_index.shape[0] == 3 and len(edge_index.shape) == 2
         assert positions.shape == (num_nodes, 3)
         assert shifts.shape[1] == 3
         assert unit_shifts.shape[1] == 3

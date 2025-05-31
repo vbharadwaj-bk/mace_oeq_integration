@@ -65,6 +65,7 @@ class OEQConfig:
     enabled: bool = False
     optimize_all: bool = False  
     optimize_channelwise: bool = False
+    optimize_symmetric: bool = False
     conv_fusion: Optional[str] = "atomic"
 
     def __post_init__(self):
@@ -289,6 +290,16 @@ class SymmetricContractionWrapper:
                 original_mace=True,
                 dtype=torch.get_default_dtype(),
                 math_dtype=torch.get_default_dtype(),
+            )
+        elif (OEQ_AVAILABLE
+              and oeq_config is not None
+              and oeq_config.enabled
+              and (oeq_config.optimize_all or oeq_config.optimize_symmetric)):
+            return oeq.SymmetricContraction(
+                irreps_in,
+                irreps_out,
+                correlation=correlation,
+                num_elements=num_elements,
             )
 
         return SymmetricContraction(

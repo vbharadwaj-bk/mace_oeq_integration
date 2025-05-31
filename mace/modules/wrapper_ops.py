@@ -24,8 +24,9 @@ try:
 except ImportError:
     CUET_AVAILABLE = False
 
-try:
+try: 
     import openequivariance as oeq 
+    from openequivariance.implementations.symmetric_contraction import SymmetricContraction as OEQSymmetricContraction
 
     OEQ_AVAILABLE = True
 except ImportError:
@@ -296,7 +297,7 @@ class SymmetricContractionWrapper:
               and oeq_config is not None
               and oeq_config.enabled
               and (oeq_config.optimize_all or oeq_config.optimize_symmetric)):
-            return oeq.SymmetricContraction(
+            return OEQSymmetricContraction( 
                 irreps_in,
                 irreps_out,
                 correlation=correlation,

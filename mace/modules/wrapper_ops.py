@@ -176,6 +176,7 @@ class TensorProductScatterSum:
             internal_weights: bool = False,
             cueq_config: Optional[CuEquivarianceConfig] = None,
             oeq_config: Optional[OEQConfig] = None):
+
         if (
             CUET_AVAILABLE
             and cueq_config is not None

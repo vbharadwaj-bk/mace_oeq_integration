@@ -29,11 +29,10 @@ def run(input_model, output_model="_e3nn.model", device="cpu", return_model=True
     target_dict = target_model.state_dict()
 
     for key in source_dict:
-        if '.conv_tp.' not in key:
+        if '.conv_tp.' not in key and "U_permuted" not in key:
             target_dict[key] = source_dict[key]
 
     for i in range(2):
-
         target_model.interactions[i].avg_num_neighbors = source_model.interactions[i].avg_num_neighbors
 
     target_model.load_state_dict(target_dict)

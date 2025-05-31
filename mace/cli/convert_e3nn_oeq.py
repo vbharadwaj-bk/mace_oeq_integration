@@ -30,7 +30,7 @@ def run(
 
     # Add OEQ config
     config["oeq_config"] = OEQConfig(
-        enabled=False,
+        enabled=True,
         optimize_all=True,
         conv_fusion="atomic"
     )
@@ -42,7 +42,7 @@ def run(
     target_dict = target_model.state_dict()
 
     for key in target_dict:
-        if '.conv_tp.' not in key:
+        if '.conv_tp.' not in key and 'U_permuted' not in key:
             target_dict[key] = source_dict[key]
 
     target_model.load_state_dict(target_dict)
